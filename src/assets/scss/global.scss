@@ -1,0 +1,199 @@
+@import "@/assets/scss/variables.scss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Josefin+Sans&display=swap');
+
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    box-sizing: border-box;
+}
+
+body {
+    @include treatment-standard;
+    overflow: auto;
+    background: nth($purples, 10);
+}
+
+h1{
+    font-family: $font-secondary;
+    font-size: 48px;
+    line-height: 60px;
+    font-weight: $font-regular;
+    padding: 0 0 $space-standard
+}
+h2{
+    font-family: $font-secondary;
+    font-size: 36px;
+    line-height: 48px;
+    font-weight: $font-regular;
+}
+h4{
+    font-style: italic;
+    font-family: $font-secondary;
+    font-weight: $font-regular;
+}
+
+p{
+    padding-bottom: $space-standard;
+}
+
+a{
+    color: nth($purples, 2);
+}
+
+button, .button{
+    display: inline-block;
+    background: nth($grays, 3);
+    color: $white !important;
+    line-height: 40px;
+    padding-top: 6px !important;
+    position: relative;
+    cursor: pointer;
+
+    &::after{
+        content: "";
+        display: block;
+        height: 0;
+        left: 0;
+        bottom: 0;
+        height: 6px !important;
+        position: absolute;
+        background: nth($purples, 7) !important;
+        transition: $transition-standard;
+    }
+
+    &:hover{
+        &::after{
+            width: 100%;
+        }
+    }
+}
+
+.image-treat{
+    position: relative;
+    overflow: hidden;
+
+    img{
+        max-width: 100%;
+    }
+
+    > figure{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: $space-wide;
+        background: rgba(nth($grays, 3), 0.92);
+        color: $white;
+    }
+}
+.socials{
+    background: $white;
+    box-shadow: $shadow-low;
+    padding: $space-wide;
+    text-align: center;
+
+    a {
+      line-height: 40px;
+      margin: 0 $space-standard;
+    }
+  }
+.site-header{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 24px;
+    padding: 0 $space-wide;
+
+}
+.site-footer{
+    background: nth($grays, 3);
+    color: $white;
+    padding: $space-wide;
+    display: flex;
+    justify-content: space-between;
+
+    a{
+        color: $white;
+    }
+    nav{
+        a {
+            display: block;
+        }
+
+        .socials {
+            a{
+                display: inline-block;
+            }
+        }
+    }
+}
+
+
+
+.main-nav{
+    a{
+        display: inline-block;
+        color: $font-color;
+        font-size: 18px;
+        text-decoration: none;
+        padding: 0 $space-standard;
+        margin: 0 $space-wide;
+        text-transform: uppercase;
+        font-family: $font-secondary;
+        position: relative;
+
+        &::after{
+            content: "";
+            display: block;
+            width: 0;
+            height: 1px;
+            background: nth($purples, 3);
+            transition: $transition-standard;
+        }
+
+        &:hover{
+            &::after{
+                width: 100%;
+            }
+        }
+        &.router-link-active{
+
+            &::after{
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+.blog-spread{
+    display: flex;
+    width: 100%;
+    padding: $space-wide 0;
+
+    a{
+        flex: 1 1;
+        margin: 0 $space-wide;
+        position: relative;
+        max-height: 300px;
+        overflow: hidden;
+
+        img{
+            width: 100%;
+            display: block;
+        }
+        span{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: $space-wide;
+            background: rgba(nth($grays, 3), 0.92);
+            color: $white;
+        }
+    }
+}

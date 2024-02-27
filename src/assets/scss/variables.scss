@@ -1,0 +1,255 @@
+/*
+    NEVER EVER EVER PUT ANY STYLES IN THIS FILE
+    Only ever use this file to set global variables
+    BAD BAD things happen if you print out styles here
+*/
+
+/** Page breakpoint definitions **/
+
+$break: 768px;
+
+
+/** Creates array of colors from dark (near black) to light (near white) **/
+
+@function color-wheel($color, $center: 5, $total: 10, $darkstep: 10, $lightstep: 10, $desat: 0) {
+
+    $colors: $color;
+
+    @for $i from 1 through $total {
+        $colors: append($colors, $color);
+    }
+
+    @for $i from 1 through ($center - 1) {
+        $colors: set-nth($colors, $center - $i, darken($color, $i * $darkstep));
+    }
+
+    @for $i from 1 through ($total - $center) {
+        $colors: set-nth($colors, $center + $i, desaturate(lighten($color, $i * $lightstep), $desat * $i));
+    }
+
+    @return $colors;
+}
+
+$blue: #161F35;
+$blues: color-wheel($blue, 3, 10, 3, 11.5, 0);
+
+$green: #00A76B;
+$greens: color-wheel($green, 4, 10, 7, 11, 1);
+$green-selected: #E9F4F0;
+
+$yellow: #F0B323;
+$yellows: color-wheel($yellow, 4, 10, 15, 7);
+
+$gray: #252422;
+$grays: color-wheel($gray, 3, 10, 8, 10.5);
+
+$purple: #410362;
+$purples: color-wheel($purple, 3, 10, 5, 11, 7);
+
+$orange: #C85C28;
+$oranges: color-wheel($orange);
+
+$maroon: #620324;
+$maroons: color-wheel($maroon, 4, 10, 4, 12, 8);
+
+$red: #da4333;
+$reds: color-wheel($red, 5, 10, 10, 9);
+
+$white: #FFFFFF;
+
+/** Text definitions **/
+$font-primary: "Inter", "Helvetica", "Arial", sans-serif;
+$font-secondary: "Josefin Sans", "Inter", "Helvetica", "Arial", sans-serif;
+$font-fa: "Font Awesome 6 Pro";
+$font-light: 200;
+$font-regular: 400;
+$font-bold: 600;
+$font-color: $gray;
+$font-size: 16px;
+$font-size-small: 14px;
+
+/** Input definitions **/
+$field-highlight: 0 0 1px 1px nth($blues, 8);
+$input-radius: 4px;
+$success: nth($greens, 3);
+$warning: $yellow;
+$danger: nth($reds, 4);
+
+/** Spacing definitions **/
+$space-standard: 8px;
+$space-narrow: 4px;
+$space-wide: 16px;
+
+/** Shadow definitions **/
+$shadow-low: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.06);
+$shadow-high: 0px 10px 10px rgba(0, 0, 0, 0.04), 0px 20px 25px rgba(0, 0, 0, 0.1);
+$shadow-intense: 0px 2px 5px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.04);
+
+
+
+/** Misc **/
+$transition-standard: all 0.15s ease-out;
+$nav-transition-time: 0.1s;
+
+
+
+/** Prevents highlighting - don't overuse this, only for preventing undesireable behaviors **/
+@mixin noselect {
+    -webkit-user-select: none; /* Safari */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    -moz-user-select: none; /* Old versions of Firefox */
+    user-select: none; /* Non-prefixed version*/
+}
+
+/** Basic text settings for convenience **/
+@mixin treatment-standard {
+    font-family: $font-primary;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: $font-regular;
+    color: $font-color;
+}
+
+/** icon-based custom checkbox **/
+@mixin checkbox {
+    content: "\f00c";
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+    border: 1px solid nth($grays, 7);
+    background: $white;
+    color: $white;
+    font-family: $font-fa;
+    font-weight: 900;
+    text-align: center;
+    line-height: 24px;
+    margin: 0 $space-narrow -6px 0;
+    border-radius: 2px;
+    transition: $transition-standard;
+}
+
+@mixin checkbox-selected {
+    background-color: $green;
+    border-color: $green;
+}
+
+/** CSS-controlled collapsing section functionality **/
+@keyframes delay-overflow {
+    from {
+        overflow: hidden;
+    }
+
+    100% {
+        overflow: hidden;
+    }
+
+    101% {
+        overflow: visible;
+    }
+}
+
+
+@mixin accordion {
+    overflow: hidden;
+
+    > div {
+        margin-bottom: -1000px;
+        transition: margin-bottom .3s cubic-bezier(.5,0,.9,.8),visibility 0s .3s,max-height 0s .3s;
+        max-height: 0;
+        overflow: hidden;
+    }
+
+    &::after {
+        content: "";
+        height: 0;
+        transition: height .3s cubic-bezier(.67,.9,.76,.37);
+        max-height: 35px;
+    }
+
+    &.open {
+        max-height: 8000px;
+        overflow: visible;
+        animation: 0.4s delay-overflow;
+
+        > div {
+            transition: margin-bottom .3s cubic-bezier(.24,.98,.26,.99);
+            margin-bottom: 0;
+            max-height: 100000000px;
+            position: relative;
+            overflow: visible;
+            animation: 0.4s delay-overflow;
+        }
+
+        &::after {
+            height: 35px;
+            max-height: 0;
+            transition: height .3s cubic-bezier(.76,.37,.67,.9),max-height 0s .3s;
+        }
+    }
+}
+@mixin autocordion($speed: 0.3s, $suffix: ''){
+    .autocordion#{$suffix}{
+        transition: all $speed;
+        max-height: 8000px;
+        overflow: visible;
+        animation: $speed delay-overflow; 
+    
+        > div {
+            transition: margin-bottom $speed cubic-bezier(.24,.98,.26,.99);
+            margin-bottom: 0;
+            max-height: 100000000px;
+            position: relative;
+            overflow: visible;
+            animation: $speed delay-overflow;
+        }
+    
+        &::after {
+            content: "";
+            height: 35px;
+            max-height: 0;
+            transition: height $speed cubic-bezier(.76,.37,.67,.9), max-height 0s $speed;
+        }
+    
+    }
+    .autocordion#{$suffix}-enter-from, .autocordion#{$suffix}-leave-to{
+        overflow: hidden;
+        max-height: 0px;
+    
+        > div {
+            margin-bottom: -1000px;
+            transition: margin-bottom $speed cubic-bezier(.5,0,.9,.8), visibility 0s $speed, max-height 0s $speed;
+            max-height: 0;
+            overflow: hidden;
+        }
+    
+        &::after {
+            content: "";
+            height: 0;
+            transition: height $speed cubic-bezier(.67,.9,.76,.37);
+            max-height: 35px;
+        }
+    }
+}
+
+/** A custom scroll bar **/
+@mixin custom-scroll {
+    &::-webkit-scrollbar {
+        width: $space-standard;
+        height: $space-standard;
+    }
+
+    &::-webkit-scrollbar-track {
+        // background: nth($grays, 10);
+        // box-shadow: 0 0 3px inset rgba(0,0,0,0.45);
+        border-radius: 5px;
+        margin: $space-standard;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: nth($grays, 8);
+        box-shadow: 0 0 3px inset rgba(0,0,0,0.45);
+    }
+}
