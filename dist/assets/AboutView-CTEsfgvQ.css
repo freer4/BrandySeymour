@@ -1,0 +1,1 @@
+@keyframes delay-overflow{0%{overflow:hidden}to{overflow:hidden}101%{overflow:visible}}@media (min-width: 1024px){.about{display:flex;padding:0 16px}.about>div{width:70%}.about>div:first-child{width:30%;flex:1 auto}.about>div+div{margin-left:32px}}
