@@ -3,7 +3,8 @@
       <div class="logo">
         Brandy Seymour <span>for</span> Ohio
       </div>
-      <nav class="main-nav">
+      <a class="mobile-toggle" :class="{'active': mobileToggle}" @click.prevent="mobileToggle = !mobileToggle"><span></span><span></span><span></span></a>
+      <nav class="main-nav" :class="{'open': mobileToggle}" @click="mobileToggle = false">
         <RouterLink :to="{name: 'District9'}">Home</RouterLink>
         <RouterLink :to="{name: 'About'}">About</RouterLink>
         <RouterLink :to="{name: 'Blog'}">Blog</RouterLink>
@@ -42,7 +43,10 @@
 
 <script setup>
 import "@/assets/scss/global.scss";
+import { ref } from "vue";
 import { RouterLink, RouterView } from 'vue-router'
+
+const mobileToggle = ref(false);
 </script>
 
 <style lang="scss">

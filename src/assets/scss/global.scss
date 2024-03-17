@@ -35,7 +35,7 @@ h4{
 }
 
 p{
-    padding-bottom: $space-standard;
+    padding-bottom: $space-wide;
 }
 
 a{
@@ -73,6 +73,7 @@ button, .button{
 .image-treat{
     position: relative;
     overflow: hidden;
+    margin-bottom: $space-wide;
 
     img{
         max-width: 100%;
@@ -95,19 +96,9 @@ button, .button{
     text-align: center;
 
     a {
-      line-height: 40px;
-      margin: 0 $space-standard;
+        line-height: 40px;
+        margin: 0 $space-standard;
     }
-  }
-.site-header{
-    width: 100%;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 24px;
-    padding: 0 $space-wide;
-
 }
 .site-footer{
     background: nth($grays, 3);
@@ -134,53 +125,16 @@ button, .button{
 
 
 
-.main-nav{
-    a{
-        display: inline-block;
-        color: $font-color;
-        font-size: 18px;
-        text-decoration: none;
-        padding: 0 $space-standard;
-        margin: 0 $space-wide;
-        text-transform: uppercase;
-        font-family: $font-secondary;
-        position: relative;
-
-        &::after{
-            content: "";
-            display: block;
-            width: 0;
-            height: 1px;
-            background: nth($purples, 3);
-            transition: $transition-standard;
-        }
-
-        &:hover{
-            &::after{
-                width: 100%;
-            }
-        }
-        &.router-link-active{
-
-            &::after{
-                width: 100%;
-            }
-        }
-    }
-}
-
 
 .blog-spread{
-    display: flex;
     width: 100%;
     padding: $space-wide 0;
 
     a{
-        flex: 1 1;
-        margin: 0 $space-wide;
         position: relative;
-        max-height: 300px;
         overflow: hidden;
+        display: block;
+        margin-bottom: $space-wide;
 
         img{
             width: 100%;
@@ -194,6 +148,129 @@ button, .button{
             padding: $space-wide;
             background: rgba(nth($grays, 3), 0.92);
             color: $white;
+        }
+    }
+}
+
+#app{
+    max-width: 100%;
+    *{
+        max-width: 100%;
+    }
+}
+
+
+.site-header{
+    position: relative;
+    padding: $space-narrow $space-wide;
+    .logo{
+        line-height: 40px;
+    }
+}
+.main-nav{
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 0;
+    overflow: hidden;
+    background: $white;
+    z-index: 120;
+
+    &.open{
+        padding-top: $space-standard;
+        height: calc(100vh - 48px);
+    }
+
+    a{
+        display: block;
+        color: $font-color;
+        font-size: 18px;
+        text-decoration: none;
+        padding: 0 $space-standard;
+        margin: 0 $space-wide;
+        text-transform: uppercase;
+        font-family: $font-secondary;
+        position: relative;
+        line-height: 40px;
+    }
+}
+.mobile-toggle{
+    position: absolute;
+    right: $space-wide;
+    width: 40px;
+    top: $space-narrow;
+    height: 40px;
+    padding: 8px 5px;
+
+    span{
+        display: block;
+        height: 2px;
+        background: nth($grays, 3);
+        margin-bottom: 8px;
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 1023px) {
+    p, h1, h2, h3, h4 {
+        padding-left: $space-standard;
+        padding-right: $space-standard;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    .mobile-toggle {
+        display: none;
+    }
+
+    .site-header{
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 24px;
+    }
+    
+    .main-nav{
+        a{
+            display: inline-block;
+            padding: 0 $space-standard;
+            line-height: 24px;
+
+            &::after{
+                content: "";
+                display: block;
+                width: 0;
+                height: 1px;
+                background: nth($purples, 3);
+                transition: $transition-standard;
+            }
+
+            &:hover{
+                &::after{
+                    width: 100%;
+                }
+            }
+            &.router-link-active{
+
+                &::after{
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .blog-spread{
+        display: flex;
+    
+        a{        
+            flex: 1 1;
+            margin: 0 $space-wide;
+            max-height: 300px;
         }
     }
 }
