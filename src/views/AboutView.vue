@@ -1,10 +1,7 @@
 <template>
   <div class="about">
-    <div class="image-treat">
-      <img src="https://cataas.com/cat?height=1200&width=600" />
-      <figure>Different Photo here, one of you outside in the community, somewhere iconic</figure>
-    </div>
     <div>
+      <img src="/images/BrandySeymour2.jpg" class="float-right" />
       <h1>About Brandy Seymour</h1>
 
       <p>I was born in Columbus, OH and am a native here. My early life was spent growing up in the rural
@@ -54,23 +51,11 @@
 
     </div>
   </div>
-  <div class="blog-spread">
-    <RouterLink :to="{name: 'Article', params: {id: 1}}">
-      <img src="https://cataas.com/cat" />
-      <span>Title of Last Blog Post</span>
-    </RouterLink>
-    <RouterLink :to="{name: 'Article', params: {id: 1}}">
-      <img src="https://cataas.com/cat" />
-      <span>Title of Another Blog Post</span>
-    </RouterLink>
-    <RouterLink :to="{name: 'Article', params: {id: 1}}">
-      <img src="https://cataas.com/cat" />
-      <span>Title of First Blog Post</span>
-    </RouterLink>
-  </div>
+  <blog-preview></blog-preview>
 </template>
 
 <script setup>
+import BlogPreview from "../components/BlogPreview.vue";
 </script>
 
 <style lang="scss">

@@ -18,14 +18,41 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
-      path: '/blog/:id',
-      name: 'Article',
-      component: HomeView
+      path: '/community',
+      name: 'Community',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/CommunityView.vue')
     },
     {
       path: '/blog',
       name: 'Blog',
-      component: HomeView
+      component: () => import('../views/BlogView.vue')      
+    },
+
+    {
+      path: '/donate',
+      name: 'Donate',
+      component: () => import('../views/DonationView.vue')      
+    },
+    
+
+    
+    {
+      path: '/blog/journey-statehouse',
+      name: 'JourneyStatehouse',
+      component: () => import('../views/Blogs/BlogOne.vue')
+    },
+    {
+      path: '/blog/journey-statehouse-part-2',
+      name: 'JourneyStatehouse2',
+      component: () => import('../views/Blogs/JourneyStatehouse2.vue')
+    },
+    {
+      path: '/blog/journey-statehouse-part-3',
+      name: 'JourneyStatehouse3',
+      component: () => import('../views/Blogs/JourneyStatehouse3.vue')
     },
   ]
 })

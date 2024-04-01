@@ -17,33 +17,23 @@
           <RouterLink :to="{name: 'Blog'}">Read up on my mission &rsaquo;</RouterLink>
           <div class="socials">
           <h4>Stay connected</h4>
-            <a><i class="fa-solid fa-envelope"></i></a>
-            <a><i class="fa-brands fa-square-facebook"></i></a>
+            <a href="mailto:brandyseymour4ohio@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+            <!-- <a><i class="fa-brands fa-square-facebook"></i></a>
             <a><i class="fa-brands fa-youtube"></i></a>
             <a><i class="fa-brands fa-instagram"></i></a>
-            <a><i class="fa-brands fa-square-twitter"></i></a>
+            <a><i class="fa-brands fa-square-twitter"></i></a> -->
           </div>
         </nav>
       </div>
     </div>
-    <div class="blog-spread">
-      <RouterLink :to="{name: 'Article', params: {id: 1}}">
-        <img src="https://cataas.com/cat" />
-        <span>Title of Last Blog Post</span>
-      </RouterLink>
-      <RouterLink :to="{name: 'Article', params: {id: 1}}">
-        <img src="https://cataas.com/cat" />
-        <span>Title of Another Blog Post</span>
-      </RouterLink>
-      <RouterLink :to="{name: 'Article', params: {id: 1}}">
-        <img src="https://cataas.com/cat" />
-        <span>Title of First Blog Post</span>
-      </RouterLink>
-    </div>
+    <blog-preview></blog-preview>
   </main>
 </template>
 
 <script setup>
+import BlogPreview from "../components/BlogPreview.vue";
+
+
 </script>
 
 
